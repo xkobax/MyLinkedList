@@ -22,19 +22,20 @@ public class MyList<E> {
         int i;
         Item<E> node;
         if (pos <= Math.round(size/2) ) {
-            i = 0;
+            i = 1;
             node = firstItem;
             while (i < pos) {
                 node = node.getNextItem();
                 i++;
             }
-        } else
+        } else {
             i = size;
             node = lastItem;
             while (i > pos) {
                node = node.getPrevItem();
                 i--;
             }
+        }
         return node.getItem();
     }
 
