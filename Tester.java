@@ -16,8 +16,9 @@ public class Tester {
         list.add("kozak9");
         list.add("kozak10");
         list.add("kozak11");
+        list.remove(8);
 
-        for (int i = 1; i < 12; i++){
+        for(int i = 1; i < list.size; i++){
         System.out.println("\n" + list.get(i));
         }
     }
