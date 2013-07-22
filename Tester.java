@@ -1,10 +1,10 @@
 package com.ciklum.study.listtry;
 
-
 public class Tester {
 
     public static void main(String[] args) {
         MyList<String> list = new MyList<String>();
+        MyList.MyIterator it = list.iterator(0);
         list.add("kozak1");
         list.add("kozak2");
         list.add("kozak3");
@@ -17,9 +17,9 @@ public class Tester {
         list.add("kozak10");
         list.add("kozak11");
         list.remove(8);
-
-        for(int i = 1; i < list.size; i++){
-        System.out.println("\n" + list.get(i));
+        while (it.hasNext()) {
+            System.out.println(it.next());
         }
+
     }
 }

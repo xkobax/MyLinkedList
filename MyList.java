@@ -1,8 +1,8 @@
 package com.ciklum.study.listtry;
 
+
 public class MyList<E> {
     int size = 0;
-
     Item<E> lastItem;
     Item<E> firstItem;
 
@@ -13,13 +13,13 @@ public class MyList<E> {
             lastItem = firstItem;
         } else
             item.setPrevItem(lastItem);
-        lastItem.setNextItem(item);
-        lastItem = item;
-        size++;
+            lastItem.setNextItem(item);
+            lastItem = item;
+            size++;
     }
 
     public E get(int position){
-       Item<E> element = getElement(position);
+        Item<E> element = getElement(position);
         return element.item;
     }
 
@@ -45,12 +45,12 @@ public class MyList<E> {
     }
 
     public void remove(int position) {
-         Item<E> lost = getElement(position);
+        Item<E> lost = getElement(position);
 
         if (position == 1) {
-           firstItem = lost.nextItem;
-           lost.nextItem.prevItem = null;
-           size--;
+            firstItem = lost.nextItem;
+            lost.nextItem.prevItem = null;
+            size--;
         } else if (position == size) {
             lastItem = lost.prevItem;
             lost.prevItem.nextItem = null;
@@ -62,38 +62,18 @@ public class MyList<E> {
         }
     }
 
-    class Item<E>{
-        E  item;
-        Item<E> itemE;
-        Item<E> nextItem;
-
-        Item<E> getItemE(int position) {
-            return itemE;
-        }
-
-        void setItemE(Item<E> itemE) {
-            this.itemE = itemE;
-        }
-
-        Item<E> prevItem;
+    public MyIterator<E> iterator(int index) {
+        return new MyIterator<E>(index);
+    }
 
 
-
-        public Item() {
-            super();
-        }
+    private class Item<E>{
+        private E  item;
+        private Item<E> nextItem;
+        private Item<E> prevItem;
 
         public Item(E value) {
             this.item = value;
-        }
-
-
-        E getItem() {
-            return item;
-        }
-
-        void setItem(E item) {
-            this.item = item;
         }
 
         Item<E> getNextItem() {
@@ -110,6 +90,25 @@ public class MyList<E> {
 
         void setPrevItem(Item<E> prevItem) {
             this.prevItem = prevItem;
+        }
+    }
+
+    protected class MyIterator<E> {
+        Item<E> next;
+        int nextIndex;
+
+        public MyIterator(int index){
+            next = (index == size) ? null : (Item<E>)getElement(index);
+            nextIndex = index;
+        }
+
+        public boolean hasNext() {
+            return nextIndex != size;
+        }
+
+        public E next() {
+            ++nextIndex;
+            return (E) get(nextIndex);
         }
     }
 
